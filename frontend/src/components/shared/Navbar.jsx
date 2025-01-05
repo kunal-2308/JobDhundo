@@ -1,0 +1,109 @@
+import React, { useState } from "react";
+import { HoveredLink, Menu, MenuItem, ProductItem } from "../ui/navbar-menu";
+import { cn } from "../../utils/cn"; // Update the import path for `utils` as needed
+import { Link } from "react-router-dom";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { toast } from "sonner";
+import { Button } from "../ui/button";
+
+export function Navbar({ className }) {
+  const [active, setActive] = useState(null);
+  const [profileModal, setModalStatus] = useState(false);
+  const [userLogStatus, setuserLogStatus] = useState(true); //get this status from the user login selector redux toolkit setup
+
+
+  //handle Logout:
+  const handleLogout = (e) => {
+    e.preventDefault();
+    toast.success('Logeed Out')
+
+  }
+  return (
+    <div className={cn("fixed top-6 inset-x-0 w-[100%] z-50 flex flex-row justify-between items-center px-10", className)}>
+      <div className="div-1">
+        <img src="/logos/JD-Logo.png" alt="" className="h-16" />
+      </div>
+      <div className="div-2">
+        <Menu setActive={setActive} className="">
+          <Link to="/">
+            <span className="text-white border-black border-b-[2px] hover:border-b-[2px] hover:border-mainGreen pb-1">Home</span>
+          </Link>
+          <MenuItem setActive={setActive} active={active} item="Jobs">
+            <div className="flex flex-col space-y-4 text-sm">
+              <Link to="/jobs">View All Jobs</Link>
+              <Link to="/jobs/applied">List of Applied Jobs</Link>
+              <Link to="/job/watchlist">WatchList</Link>
+            </div>
+          </MenuItem>
+          <MenuItem setActive={setActive} active={active} item="Blogs">
+            <div className="flex flex-col space-y-4 text-sm">
+              <Link to="/blogs">View Blogs</Link>
+              <Link to="/blog/post">Post a Blog</Link>
+              <Link to="/blog/review">Review your Blogs</Link>
+            </div>
+          </MenuItem>
+          <MenuItem setActive={setActive} active={active} item="Resources">
+            <div className="text-sm grid grid-cols-2 gap-10 p-4 overflow-y-scroll h-[200px]">
+              <ProductItem
+                title="DSA Beginner Sheet"
+                href="https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2"
+                src="/resources/SDE-A-Z.png"
+                description="Prepare for tech interviews like never before."
+              />
+              <ProductItem
+                title="Basics of Development"
+                href="https://algochurn.com"
+                src="https://assets.aceternity.com/demos/algochurn.webp"
+                description="Prepare for tech interviews like never before."
+              />
+              <ProductItem
+                title="Master Core Languages"
+                href="https://algochurn.com"
+                src="https://assets.aceternity.com/demos/algochurn.webp"
+                description="Prepare for tech interviews like never before."
+              />
+              <ProductItem
+                title="Advanced Development"
+                href="https://algochurn.com"
+                src="https://assets.aceternity.com/demos/algochurn.webp"
+                description="Prepare for tech interviews like never before."
+              />
+            </div>
+          </MenuItem>
+          <Link to="/about">
+            <span className="text-white border-black border-b-[2px] hover:border-b-[2px] hover:border-mainGreen pb-1">About Us</span>
+          </Link>
+        </Menu>
+      </div>
+      <div
+        className="div-3 relative flex flex-col"
+        onMouseEnter={() => setModalStatus(true)}
+        onMouseLeave={() => setModalStatus(false)}
+      >
+        <Avatar className="h-20 w-20 hover:cursor-pointer border-[1px] border-slate-100 rounded-full hover:border-slate-200 hover:shadow-xl">
+          <AvatarImage src="/logos/guestMemoji-icon.png" />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
+
+        {/* //user Profile Modal */}
+        {profileModal ? (
+          userLogStatus ? (<div className="absolute right-0 top-full mt-2 w-48 bg-black text-white  rounded-lg shadow-lg p-4 z-50 flex flex-col">
+            <p className="text-center mb-2"><span className="font-medium text-lg text-mainGreen">Welcome</span> <span>Kunal !</span></p>
+            <Link to='/user/profile'>
+              <div className="div-1 border-slate-300 border-b-[1px] py-1 hover:cursor-pointer  hover:text-mainGreen hover:font-medium">
+                <span>View Profile</span>
+              </div>
+            </Link>
+            <div className="div-1 border-slate-300 py-1 hover:cursor-pointer hover:animate-pulse hover:text-mainGreen hover:font-medium" onClick={handleLogout}>
+              <span>Logout</span>
+            </div>
+          </div>) :
+            (<div className="absolute right-0 top-full mt-2 w-48 bg-black text-white  rounded-lg shadow-lg p-4 z-50 flex flex-col">
+              <p className="text-center mb-2"><span className="font-medium text-lg text-mainGreen">Welcome</span> <span>Guest !</span></p>
+              <Button className='bg-black/95 border-[1px] border-slate-200' onClick={(e)=>{e.preventDefault; toast.success('Clicked on login, attach a login modal form compoenent here')}}>Signup / Login</Button>
+            </div>)
+        ) : null}
+      </div>
+    </div >
+  );
+}
