@@ -80,7 +80,7 @@ export function Navbar({ className }) {
         onMouseEnter={() => setModalStatus(true)}
         onMouseLeave={() => setModalStatus(false)}
       >
-        <Avatar className="h-20 w-20 hover:cursor-pointer border-[1px] border-slate-100 rounded-full hover:border-slate-200 hover:shadow-xl">
+        <Avatar className="h-16 w-16 hover:cursor-pointer border-[1px] border-slate-700 rounded-full hover:border-slate-200 hover:shadow-xl">
           <AvatarImage src="/logos/guestMemoji-icon.png" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
@@ -88,7 +88,7 @@ export function Navbar({ className }) {
         {/* //user Profile Modal */}
         {profileModal ? (
           userLogStatus ? (<div className="absolute right-0 top-full mt-2 w-48 bg-black text-white  rounded-lg shadow-lg p-4 z-50 flex flex-col">
-            <p className="text-center mb-2"><span className="font-medium text-lg text-mainGreen">Welcome</span> <span>Kunal !</span></p>
+            <p className="text-center mb-4"><span className="font-medium text-lg text-mainGreen">Welcome</span> <span className="pl-1">Kunal !</span></p>
             <Link to='/user/profile'>
               <div className="div-1 border-slate-300 border-b-[1px] py-1 hover:cursor-pointer  hover:text-mainGreen hover:font-medium">
                 <span>View Profile</span>

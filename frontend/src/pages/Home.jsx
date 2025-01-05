@@ -1,9 +1,16 @@
+import { PlaceholdersAndVanishInputDemo } from '@/components/shared/PlaceHolder'
+import CategoryButtons from '@/components/user/CategoryButtons'
+import EsteemedPartners from '@/components/user/EsteemedPartners'
+import { SpotlightPreview } from '@/components/user/HeroSection1'
 import React from 'react'
 
 function Home() {
   return (
     <div>
-      <h1>This is home page</h1>
+     <SpotlightPreview/>
+     <EsteemedPartners/>
+     <PlaceholdersAndVanishInputDemo/>
+     
     </div>
   )
 }
