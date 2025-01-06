@@ -166,7 +166,9 @@ export function PlaceholdersAndVanishInput({ placeholders, onChange, onSubmit })
     e.preventDefault();
     vanishAndSubmit();
     onSubmit && onSubmit(e);
-    navigate(`/jobs/query=${value}`);
+    setTimeout(()=>{
+      navigate(`/jobs/query=${value}`);
+    },[1000]);
   };
 
   return (
