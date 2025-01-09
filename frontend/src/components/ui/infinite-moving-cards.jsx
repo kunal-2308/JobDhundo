@@ -82,7 +82,7 @@ export const InfiniteMovingCards = ({
               <img
                 src={`${item.src}`}
                 alt={item.name || `Image ${idx}`}
-                className="h-16 w-[80px] rounded-md hover:cursor-pointer"
+                className="h-[70px] w-[86px] rounded-md hover:cursor-pointer"
                 onClick={()=>{navigate(`/user/v1/organisation/query=${item.name}`)}}
               />
             </li>
