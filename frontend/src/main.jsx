@@ -4,11 +4,9 @@ import App from './App.jsx';
 import { BrowserRouter } from 'react-router-dom';
 import { Toaster } from './components/ui/sonner';
 
-
 createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
-    <App />
-    <Toaster />
-  </BrowserRouter>
-
+    <BrowserRouter>
+      <App />
+      <Toaster />
+    </BrowserRouter>
 );
