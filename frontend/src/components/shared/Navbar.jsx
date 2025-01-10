@@ -5,19 +5,22 @@ import { Link } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
+import {useNavigate} from "react-router-dom";
 
 export function Navbar({ className }) {
   const [active, setActive] = useState(null);
   const [profileModal, setModalStatus] = useState(false);
-  const [userLogStatus, setuserLogStatus] = useState(true); //get this status from the user login selector redux toolkit setup
+  const [userLogStatus, setuserLogStatus] = useState(false); //get this status from the user login selector redux toolkit setup
 
+  const navigate = useNavigate();
 
   //handle Logout:
   const handleLogout = (e) => {
     e.preventDefault();
-    toast.success('Logeed Out')
-
+    toast.success('Logged Out')
   }
+
+
   return (
     <div className={cn("fixed top-6 inset-x-0 w-[100%] z-50 flex flex-row justify-between items-center px-10", className)}>
       <div className="div-1">
@@ -100,7 +103,7 @@ export function Navbar({ className }) {
           </div>) :
             (<div className="absolute right-0 top-full mt-2 w-48 bg-black text-white  rounded-lg shadow-lg p-4 z-50 flex flex-col">
               <p className="text-center mb-2"><span className="font-medium text-lg text-mainGreen">Welcome</span> <span>Guest !</span></p>
-              <Button className='bg-black/95 border-[1px] border-slate-200' onClick={(e)=>{e.preventDefault; toast.success('Clicked on login, attach a login modal form compoenent here')}}>Signup / Login</Button>
+              <Button className='bg-black/95 border-[1px] border-slate-200' onClick={()=>{navigate('/user/login')}}>Signup / Login</Button>
             </div>)
         ) : null}
       </div>

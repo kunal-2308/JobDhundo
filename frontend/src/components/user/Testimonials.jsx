@@ -10,13 +10,13 @@ function Testimonials() {
                 </div>
                 <div className="div-video-section flex flex-row justify-evenly items-center w-full gap-x-10">
                     <div className="div-1">
-                        <iframe width="408" height="403" src="https://www.youtube.com/embed/lXqHjBoSiGs" title="Student Testimonias" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <iframe width="408" height="403" src="https://www.youtube.com/embed/lXqHjBoSiGs" title="Student Testimonias"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                     </div>
                     <div className="div-1">
-                        <iframe width="408" height="403" src="https://www.youtube.com/embed/DIFCMtzg7xg" title="Student Testimonial - Varnika Chauhan" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <iframe width="408" height="403" src="https://www.youtube.com/embed/DIFCMtzg7xg" title="Student Testimonial - Varnika Chauhan"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                     </div>
                     <div className="div-1">
-                        <iframe width="408" height="403" src="https://www.youtube.com/embed/L-fm0Fvygi0" title="Student Testimonial - Rishika Singh" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <iframe width="408" height="403" src="https://www.youtube.com/embed/L-fm0Fvygi0" title="Student Testimonial - Rishika Singh"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
                     </div>
                 </div>
             </div>

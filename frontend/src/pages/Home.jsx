@@ -4,10 +4,8 @@ import { InfiniteMovingCardsCompany } from '@/components/user/CompanyRoller'
 import EsteemedPartners from '@/components/user/EsteemedPartners'
 import { SpotlightPreview } from '@/components/user/HeroSection1'
 import { InfiniteMovingCardsIntitute } from '@/components/user/InstituteRoller'
-import { TailwindcssButtons } from '@/components/user/MainUIButton'
 import { FlipWordsResources } from '@/components/user/ResourcesHomeSection'
 import Testimonials from '@/components/user/Testimonials'
-import { AnimatedTooltipResources } from '@/components/user/resourcesTooltip'
 import React from 'react'
 
 function Home() {
@@ -22,7 +20,6 @@ function Home() {
       <FlipWordsResources />
       <Footer />
       
-
     </div>
   )
 }
