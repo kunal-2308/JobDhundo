@@ -18,8 +18,6 @@ function Home() {
       <InfiniteMovingCardsCompany />
       <Testimonials />
       <FlipWordsResources />
-      <Footer />
-      
     </div>
   )
 }

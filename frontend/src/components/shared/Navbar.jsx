@@ -1,35 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HoveredLink, Menu, MenuItem, ProductItem } from "../ui/navbar-menu";
 import { cn } from "../../utils/cn"; // Update the import path for `utils` as needed
 import { Link } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export function Navbar({ className }) {
   const [active, setActive] = useState(null);
   const [profileModal, setModalStatus] = useState(false);
-  const [userLogStatus, setuserLogStatus] = useState(false); //get this status from the user login selector redux toolkit setup
 
   const navigate = useNavigate();
+  const {
+    user,
+    isAuthenticated,
+    isLoading,
+    loginWithRedirect,
+    logout,
+  } = useAuth0();
 
-  //handle Logout:
+  // Handle logout with Auth0
   const handleLogout = (e) => {
     e.preventDefault();
-    toast.success('Logged Out')
-  }
-
+    logout({ returnTo: window.location.origin });
+    toast.success("Logged Out");
+  };
 
   return (
-    <div className={cn("fixed top-6 inset-x-0 w-[100%] z-50 flex flex-row justify-between items-center px-10", className)}>
+    <div
+      className={cn(
+        "fixed top-6 inset-x-0 w-[100%] z-50 flex flex-row justify-between items-center px-10",
+        className
+      )}
+    >
       <div className="div-1">
         <img src="/logos/JD-Logo.png" alt="" className="h-16" />
       </div>
       <div className="div-2">
         <Menu setActive={setActive} className="">
           <Link to="/">
-            <span className="text-white border-black border-b-[2px] hover:border-b-[2px] hover:border-mainGreen pb-1">Home</span>
+            <span className="text-white border-black border-b-[2px] hover:border-b-[2px] hover:border-mainGreen pb-1">
+              Home
+            </span>
           </Link>
           <MenuItem setActive={setActive} active={active} item="Jobs">
             <div className="flex flex-col space-y-4 text-sm">
@@ -74,7 +88,9 @@ export function Navbar({ className }) {
             </div>
           </MenuItem>
           <Link to="/about">
-            <span className="text-white border-black border-b-[2px] hover:border-b-[2px] hover:border-mainGreen pb-1">About Us</span>
+            <span className="text-white border-black border-b-[2px] hover:border-b-[2px] hover:border-mainGreen pb-1">
+              About Us
+            </span>
           </Link>
         </Menu>
       </div>
@@ -84,29 +100,48 @@ export function Navbar({ className }) {
         onMouseLeave={() => setModalStatus(false)}
       >
         <Avatar className="h-16 w-16 hover:cursor-pointer border-[1px] border-slate-700 rounded-full hover:border-slate-200 hover:shadow-xl">
-          <AvatarImage src="/logos/guestMemoji-icon.png" />
+          <AvatarImage src={isAuthenticated ? user?.picture : "/logos/guestMemoji-icon.png"} />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
 
-        {/* //user Profile Modal */}
+        {/* User Profile Modal */}
         {profileModal ? (
-          userLogStatus ? (<div className="absolute right-0 top-full mt-2 w-48 bg-black text-white  rounded-lg shadow-lg p-4 z-50 flex flex-col">
-            <p className="text-center mb-4"><span className="font-medium text-lg text-mainGreen">Welcome</span> <span className="pl-1">Kunal !</span></p>
-            <Link to='/user/profile'>
-              <div className="div-1 border-slate-300 border-b-[1px] py-1 hover:cursor-pointer  hover:text-mainGreen hover:font-medium">
-                <span>View Profile</span>
+          isAuthenticated ? (
+            <div className="absolute right-0 top-full mt-2 w-48 bg-black text-white rounded-lg shadow-lg p-4 z-50 flex flex-col">
+              <p className="text-center mb-4">
+                <span className="font-medium text-lg text-mainGreen">Welcome</span>{" "}
+                <span className="pl-1">{user?.name?.split(" ")[0]?.charAt(0).toUpperCase() + user?.name?.split(" ")[0]?.slice(1)} !</span>
+              </p>
+              <Link to="/user/profile">
+                <div className="div-1 border-slate-300 border-b-[1px] py-1 hover:cursor-pointer hover:text-mainGreen hover:font-medium">
+                  <span>View Profile</span>
+                </div>
+              </Link>
+              <div
+                className="div-1 border-slate-300 py-1 hover:cursor-pointer hover:animate-pulse hover:text-mainGreen hover:font-medium"
+                onClick={handleLogout}
+              >
+                <span>Logout</span>
               </div>
-            </Link>
-            <div className="div-1 border-slate-300 py-1 hover:cursor-pointer hover:animate-pulse hover:text-mainGreen hover:font-medium" onClick={handleLogout}>
-              <span>Logout</span>
             </div>
-          </div>) :
-            (<div className="absolute right-0 top-full mt-2 w-48 bg-black text-white  rounded-lg shadow-lg p-4 z-50 flex flex-col">
-              <p className="text-center mb-2"><span className="font-medium text-lg text-mainGreen">Welcome</span> <span>Guest !</span></p>
-              <Button className='bg-black/95 border-[1px] border-slate-200' onClick={()=>{navigate('/user/login')}}>Signup / Login</Button>
-            </div>)
+          ) : (
+            <div className="absolute right-0 top-full mt-2 w-48 bg-black text-white rounded-lg shadow-lg p-4 z-50 flex flex-col">
+              <p className="text-center mb-2">
+                <span className="font-medium text-lg text-mainGreen">Welcome</span>{" "}
+                <span>Guest!</span>
+              </p>
+              <Button
+                className="bg-black/95 border-[1px] border-slate-200"
+                onClick={() => {
+                    navigate('/login')
+                }}
+              >
+                Signup / Login
+              </Button>
+            </div>
+          )
         ) : null}
       </div>
-    </div >
+    </div>
   );
 }
