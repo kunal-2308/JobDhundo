@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 const connectDb = require('../backend/DbConfig/dbConfig');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-
+const authRoutes = require('./routes/authRoutes')
 
 //Calls:
 dotenv.config();
@@ -16,6 +16,9 @@ app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 app.use(cors({origin:'*'}));
 app.use(cookieParser());
+
+//Routes:
+app.use('/api/v1',authRoutes);
 
 
 //Port Call:
