@@ -1,5 +1,5 @@
 import React from "react";
-import { InfiniteMovingCards } from "../ui/infinite-moving-cards";
+import { InfiniteMovingCards } from "../../ui/infinite-moving-cards";
 
 export function InfiniteMovingCardsIntitute() {
   return (

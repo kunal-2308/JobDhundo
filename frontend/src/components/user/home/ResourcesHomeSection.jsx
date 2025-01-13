@@ -1,6 +1,6 @@
 import React from "react";
-import { FlipWords } from "../ui/flip-words";
-import { Button } from "../ui/button";
+import { FlipWords } from "../../ui/flip-words";
+import { Button } from "../../ui/button";
 import { AnimatedTooltipResources } from "./resourcesTooltip";
 import { Link } from "react-router-dom";
 

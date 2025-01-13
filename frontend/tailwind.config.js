@@ -40,6 +40,7 @@ export const theme = {
     },
     colors: {
       mainGreen: "#B0DD7D",
+      lightSkin : '#FAFAFA',
       background: "hsl(var(--background))",
       foreground: "hsl(var(--foreground))",
       card: {

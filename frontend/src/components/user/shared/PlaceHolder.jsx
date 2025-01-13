@@ -1,7 +1,7 @@
 import React from "react";
 import { PlaceholdersAndVanishInput } from "../../ui/placeholders-and-vanish-input";
-import CategoryButtons from "../CategoryButtons";
-import TopJobs from "../TopJobs";
+import CategoryButtons from "../home/CategoryButtons";
+import TopJobs from "../home/TopJobs";
 
 export function PlaceholdersAndVanishInputDemo() {
     const placeholders = [

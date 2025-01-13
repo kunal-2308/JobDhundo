@@ -1,6 +1,6 @@
 import React from "react";
-import { Spotlight } from "../ui/spotlight"; // Adjust the path based on your project structure
-import { Button } from "../ui/button";
+import { Spotlight } from "../../ui/spotlight"; // Adjust the path based on your project structure
+import { Button } from "../../ui/button";
 import { Link } from "react-router-dom";
 
 export function SpotlightPreview() {

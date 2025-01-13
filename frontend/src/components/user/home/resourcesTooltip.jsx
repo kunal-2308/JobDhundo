@@ -1,5 +1,5 @@
 import React from "react";
-import { AnimatedTooltip } from "../ui/animated-tooltip"; // Ensure this path points to your actual component file
+import { AnimatedTooltip } from "../../ui/animated-tooltip"; // Ensure this path points to your actual component file
 
 const people = [
     {
