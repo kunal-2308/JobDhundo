@@ -22,7 +22,7 @@ function App() {
          {/* Recruiter Routes */}
          <Route path='/recruiter/orgaisation/signup' element={<RecruiterLogin/>}/>
       </Routes>
-      {/* <Footer/> */}
+      <Footer/>
     </>
   );
 }
