@@ -21,6 +21,10 @@ export function Navbar({ className }) {
     logout,
   } = useAuth0();
 
+  if (isAuthenticated) {
+    console.log(user);
+  }
+
   // Handle logout with Auth0
   const handleLogout = (e) => {
     e.preventDefault();
@@ -99,18 +103,29 @@ export function Navbar({ className }) {
         onMouseEnter={() => setModalStatus(true)}
         onMouseLeave={() => setModalStatus(false)}
       >
-        <Avatar className="h-16 w-16 hover:cursor-pointer border-[1px] border-slate-700 rounded-full hover:border-slate-200 hover:shadow-xl">
-          <AvatarImage src={isAuthenticated ? user?.picture : "/logos/guestMemoji-icon.png"} />
-          <AvatarFallback>CN</AvatarFallback>
+        <Avatar className="h-12 w-12 hover:cursor-pointer border-[1px] border-slate-700 rounded-full hover:border-slate-200 hover:shadow-xl">
+          <AvatarImage
+            src={isAuthenticated && user?.picture ? user.picture : "/logos/guestMemoji-icon.png"}
+            alt={user?.name || 'User Avatar'}
+          />
+          {/* Fallback image in case picture is still unavailable */}
+          <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
         </Avatar>
+
 
         {/* User Profile Modal */}
         {profileModal ? (
           isAuthenticated ? (
-            <div className="absolute right-0 top-full mt-2 w-48 bg-black text-white rounded-lg shadow-lg p-4 z-50 flex flex-col">
+            <div className="absolute right-0 top-full mt-2 w-max bg-black text-white rounded-lg shadow-lg p-4 z-50 flex flex-col">
               <p className="text-center mb-4">
                 <span className="font-medium text-lg text-mainGreen">Welcome</span>{" "}
-                <span className="pl-1">{user?.name?.split(" ")[0]?.charAt(0).toUpperCase() + user?.name?.split(" ")[0]?.slice(1)} !</span>
+                <span className="pl-1">
+                  {user?.name
+                    ? user?.name.split(" ")[0]?.charAt(0).toUpperCase() + user?.name.split(" ")[0]?.slice(1)
+                    : user?.email?.split("@")[0]
+                  } !
+                </span>
+
               </p>
               <Link to="/user/profile">
                 <div className="div-1 border-slate-300 border-b-[1px] py-1 hover:cursor-pointer hover:text-mainGreen hover:font-medium">
@@ -133,7 +148,7 @@ export function Navbar({ className }) {
               <Button
                 className="bg-black/95 border-[1px] border-slate-200"
                 onClick={() => {
-                    navigate('/login')
+                  navigate('/login')
                 }}
               >
                 Signup / Login
