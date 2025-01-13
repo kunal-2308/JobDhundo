@@ -3,10 +3,11 @@ const jwt = require("jsonwebtoken");
 
 const COOKIE_OPTIONS = {
   httpOnly: true,
-  secure: false, // Only true in production for HTTPS
-  sameSite: "none", // Necessary for cross-origin requests
+  secure: true, // Must be true since backend is on HTTPS
+  sameSite: "none", // Required for cross-origin requests
   maxAge: 10 * 24 * 60 * 60 * 1000, // 10 days
 };
+
 
 const register = async (req, res) => {
   let { auth0Id, email, name, picture } = req.body;
