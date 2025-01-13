@@ -16,8 +16,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(
   cors({
-    origin : "*",
-    // credentials: true, // Allow cookies to be sent and received
+    origin : "http://localhost:5173/",
+    credentials: true, // Allow cookies to be sent and received
   })
 );
 
