@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 
 const COOKIE_OPTIONS = {
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production", // Only true in production for HTTPS
+  secure: false, // Only true in production for HTTPS
   sameSite: "none", // Necessary for cross-origin requests
   maxAge: 10 * 24 * 60 * 60 * 1000, // 10 days
 };
