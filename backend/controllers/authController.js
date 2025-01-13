@@ -72,15 +72,17 @@ const login = async (req, res) => {
       await user.save();
     }
 
-    const token = jwt.sign(
+    let token = jwt.sign(
       { auth0Id: user.auth0Id, email: user.email },
       process.env.SECRET_KEY,
       { expiresIn: "10d" }
     );
 
+    console.log(token);
+
     // Set the token as an HTTP-only cookie
     res.cookie("token", token, COOKIE_OPTIONS);
-
+    console.log('Cookie set success');
     return res.status(user.isNew ? 201 : 200).json({
       message: user.isNew ? "User registered successfully" : "Login Success",
       user,
