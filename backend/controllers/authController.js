@@ -3,9 +3,9 @@ const jwt = require("jsonwebtoken");
 
 const COOKIE_OPTIONS = {
   httpOnly: true,
-  secure: true, // Must be true since backend is on HTTPS
-  sameSite: "none", // Required for cross-origin requests
-  maxAge: 10 * 24 * 60 * 60 * 1000, // 10 days
+  secure: true, 
+  sameSite: "none", 
+  maxAge: 10 * 24 * 60 * 60 * 1000, 
 };
 
 
@@ -13,7 +13,7 @@ const register = async (req, res) => {
   let { auth0Id, email, name, picture } = req.body;
 
   if (!auth0Id || !email) {
-    return res.status(400).json({ message: "auth0Id and email are required" });
+    return res.status(400).json({ message: "auth0Id and email are required",status:false});
   }
 
   if (!name || name.trim().length === 0) {
