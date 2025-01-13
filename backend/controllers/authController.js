@@ -1,6 +1,13 @@
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 
+const COOKIE_OPTIONS = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production", // Only true in production for HTTPS
+  sameSite: "none", // Necessary for cross-origin requests
+  maxAge: 10 * 24 * 60 * 60 * 1000, // 10 days
+};
+
 const register = async (req, res) => {
   let { auth0Id, email, name, picture } = req.body;
 
@@ -23,7 +30,6 @@ const register = async (req, res) => {
         profilePhoto: picture,
       });
       await user.save();
-      console.log("User created successfully");
     } else {
       console.log("User already exists");
     }
@@ -34,24 +40,64 @@ const register = async (req, res) => {
       { expiresIn: "10d" }
     );
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      maxAge: 10 * 24 * 60 * 60 * 1000,
-    });
+    // Set the token as an HTTP-only cookie
+    res.cookie("token", token, COOKIE_OPTIONS);
 
-    return res
-      .status(user.isNew ? 201 : 200)
-      .json({
-        message: user.isNew
-          ? "User registered successfully"
-          : "User already exists",
-        user,
-      });
+    return res.status(user.isNew ? 201 : 200).json({
+      message: user.isNew
+        ? "User registered successfully"
+        : "User already exists",
+      user,
+    });
   } catch (error) {
     console.error("Error during registration:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
-module.exports = { register };
+const login = async (req, res) => {
+  let { auth0Id, email, name, picture } = req.body;
+  console.log('Login Success');
+  try {
+    let user = await User.findOne({ auth0Id });
+
+    if (!user) {
+      user = new User({
+        auth0Id,
+        email,
+        userName: name,
+        profilePhoto: picture,
+      });
+      await user.save();
+    }
+
+    const token = jwt.sign(
+      { auth0Id: user.auth0Id, email: user.email },
+      process.env.SECRET_KEY,
+      { expiresIn: "10d" }
+    );
+
+    // Set the token as an HTTP-only cookie
+    res.cookie("token", token, COOKIE_OPTIONS);
+
+    return res.status(user.isNew ? 201 : 200).json({
+      message: user.isNew ? "User registered successfully" : "Login Success",
+      user,
+    });
+  } catch (error) {
+    console.error("Error during login:", error.message);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+const check = async(req,res)=>{
+  try {
+    console.log('Test');
+    return res.status(200).json({message:"Happy"});
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json({message:error.message});
+  }
+}
+
+module.exports = { register, login,check };
