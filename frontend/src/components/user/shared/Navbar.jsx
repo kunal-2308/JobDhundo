@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { HoveredLink, Menu, MenuItem, ProductItem } from "../ui/navbar-menu";
-import { cn } from "../../utils/cn"; // Update the import path for `utils` as needed
+import { HoveredLink, Menu, MenuItem, ProductItem } from "../../ui/navbar-menu";
+import { cn } from "../../../utils/cn"; // Update the import path for `utils` as needed
 import { Link } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { toast } from "sonner";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -148,7 +148,7 @@ export function Navbar({ className }) {
               <Button
                 className="bg-black/95 border-[1px] border-slate-200"
                 onClick={() => {
-                  navigate('/login')
+                  navigate('/user/login')
                 }}
               >
                 Signup / Login

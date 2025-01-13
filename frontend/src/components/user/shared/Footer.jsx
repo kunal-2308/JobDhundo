@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import { toast } from "sonner";
 import { AiFillFacebook } from "react-icons/ai";
 import { FaYoutube } from "react-icons/fa";
