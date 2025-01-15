@@ -21,9 +21,6 @@ export function Navbar({ className }) {
     logout,
   } = useAuth0();
 
-  if (isAuthenticated) {
-    console.log(user);
-  }
 
   // Handle logout with Auth0
   const handleLogout = (e) => {

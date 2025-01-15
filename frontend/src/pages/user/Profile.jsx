@@ -14,21 +14,42 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 
 function Profile() {
-  const { logout } = useAuth0();
 
-  const [user, setUserProfile] = useState({
+  var { logout, user } = useAuth0();
+
+  const [suser, setUserProfile] = useState({
     "_id": "64cf56b21f5d3c45e07b8d3b",
     "auth0Id": "auth0|123456789",
     "email": "kunaltaware210@@example.com",
     "userName": "Kunal Taware",
     "bio": "Web developer with a passion for building impactful projects.",
-    "About": "I specialize in creating responsive websites and web applications.",
+    "About": "Passionate Web Developer 💻 | Crafting seamless user experiences with a focus on responsive design 📱 and intuitive interfaces 🎨. Proficient in JavaScript, React, and Node.js 🚀, with a knack for turning ideas into functional, scalable solutions 🌟. Always eager to learn and adapt to emerging technologies 🧑‍💻, I thrive in collaborative environments 🤝 and enjoy tackling complex challenges head-on 🧩. Let’s create something amazing together! 🌐",
     "phoneNumber": "1234567890",
     "role": "User",
     "profilePhoto": "/logos/guestMemoji-icon.png",
     "appliedJobs": [],
     "savedJobs": [],
-    "skills": ["JavaScript", "React", "Node.js"],
+    "skills": [
+      "JavaScript",
+      "React",
+      "Node.js",
+      "HTML5",
+      "CSS3",
+      "TypeScript",
+      "Tailwind CSS",
+      "MongoDB",
+      "Express.js",
+      "Next.js",
+      "Redux",
+      "Git",
+      "RESTful APIs"
+    ],
+    "languages": [
+      "English",
+      "Spanish",
+      "Marathi",
+      "Hindi",
+    ],
     "profileIsComplete": true,
     "isBlocked": false,
     "createdAt": "2025-01-13T10:00:00.000Z",
@@ -53,6 +74,7 @@ function Profile() {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
+
   }, []);
 
   useEffect(() => {
@@ -79,23 +101,24 @@ function Profile() {
       setDate(formattedDate);
     };
 
-    convertDate(user.createdAt);
-  }, [user.createdAt]);
+    convertDate(suser.createdAt);
+  }, [suser.createdAt]);
 
   const renderContent = () => {
     switch (activeSection) {
       case 'Profile':
-        return <AboutProfile/>;
+        return <AboutProfile desc={suser.About} skills={suser.skills} languages={suser.languages} />;
       case 'AppliedJobs':
-        return <AppliedJobsProfile/>;
+        return <AppliedJobsProfile />;
       case 'SavedJobs':
-        return <SavedJobsProfileSection/>;
+        return <SavedJobsProfileSection />;
       case 'Blogs':
-        return <PostedBlogsSectionProfile/>;
+        return <PostedBlogsSectionProfile />;
       default:
         return null;
     }
   };
+
 
   return (
     <>
@@ -112,14 +135,14 @@ function Profile() {
           </Link>
           <div className="div-profile-image absolute bottom-[-40px] left-1/2 transform -translate-x-1/2">
             <img
-              src="../../logos/guestMemoji-icon.png"
+              src={suser.profilePhoto}
               alt="userProfileImage"
               className="w-[80px] h-[80px] rounded-full border-4 border-white shadow-lg bg-white"
             />
           </div>
         </div>
         <div className="div-profile-name w-full flex justify-center items-center mt-14">
-          <span className='text-2xl font-semibold'>{user.userName}</span>
+          <span className='text-2xl font-semibold'>{user.name}</span>
         </div>
         <div className="div-short-bio flex justify-center items-center mt-2">
           <span className='text-center w-[500px] text-sm text-neutral-700'>
@@ -127,7 +150,7 @@ function Profile() {
           </span>
         </div>
         <div className="div-email-section flex flex-row justify-center items-center gap-x-[8px] font-medium text-xs mt-4 text-neutral-500">
-          <span>kunaltaware210@gmail.com</span>
+          <span>{user.email}</span>
           <span className='pb-2'>.</span>
           <span>Joined {date}</span>
           <span className='pb-2'>.</span>
@@ -175,10 +198,10 @@ function Profile() {
           ))}
         </div>
         <div className="div-content mt-5 px-6 flex flex-row">
-          <div className="div-main-page-content w-[70%] border-r-4">
+          <div className="div-main-page-content w-[70%]">
             {renderContent()}
           </div>
-          <div className="div-container-section pl-10 flex flex-col justify-center items-center">
+          <div className="div-container-section pl-10 flex flex-col justify-start items-center">
             <div className="div-social-container w-full flex flex-col justify-start items-start border-[1px] pt-2 pb-3 px-4 rounded-xl">
               <div className="div-title">
                 <span className='text-lg font-semibold'>Social Links</span>
@@ -186,16 +209,16 @@ function Profile() {
               <div className="div-content flex flex-col gap-y-2 mt-3">
                 <a href='https://github.com/kunal-2308' target="_blank"
                   rel="noopener noreferrer"><div className='bg-lightSkin/100 py-3 px-2 rounded-lg flex flex-row justify-between items-center gap-x-7'>
-                  <span className='text-xs font-semibold text-neutral-700'>Github - Kunal</span>
-                  <TbExternalLink size={16} className='text-sky-400 font-semibold' />
-                </div></a>
+                    <span className='text-xs font-semibold text-neutral-700'>https://github.com/kunal-2308</span>
+                    <TbExternalLink size={16} className='text-sky-400 font-semibold' />
+                  </div></a>
                 <a
                   href="https://www.linkedin.com/in/kunal-taware-a76832233/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <div className='bg-lightSkin/100 py-3 px-2 rounded-lg flex flex-row justify-between items-center gap-x-7'>
-                    <span className='text-xs font-semibold text-neutral-700'>LinkedIn - Kunal</span>
+                    <span className='text-xs font-semibold text-neutral-700'>https://github.com/kunal-2308</span>
                     <TbExternalLink size={16} className='text-sky-400 font-semibold' />
                   </div>
                 </a>
@@ -209,5 +232,6 @@ function Profile() {
     </>
   );
 }
+
 
 export default Profile;
