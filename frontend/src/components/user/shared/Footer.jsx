@@ -58,12 +58,12 @@ function Footer() {
               <BsTwitterX size={20} className="hover:cursor-pointer text-neutral-500 hover:text-white" />
             </div>
             <div className="div-grid-sections grid grid-cols-3 text-neutral-300 gap-x-6 gap-y-2 mt-5 font-thin text-xs">
-              <span className="hover:text-white hover:cursor-pointer">Home</span>
-              <span className="hover:text-white hover:cursor-pointer">Jobs</span>
-              <span className="hover:text-white hover:cursor-pointer">Blogs</span>
-              <span className="hover:text-white hover:cursor-pointer">Resouces</span>
-              <span className="hover:text-white hover:cursor-pointer">About us</span>
-              <span className="hover:text-white hover:cursor-pointer">ContactUs</span>
+              <Link to='/'><span className="hover:text-white hover:cursor-pointer">Home</span></Link>
+              <Link to='/jobs'><span className="hover:text-white hover:cursor-pointer">Jobs</span></Link>
+              <Link to='/blogs'><span className="hover:text-white hover:cursor-pointer">Blogs</span></Link>
+              <Link to=''><span className="hover:text-white hover:cursor-pointer">Resouces</span></Link>
+              <Link to='/about'><span className="hover:text-white hover:cursor-pointer">About us</span></Link>
+              <Link to='/contact'><span className="hover:text-white hover:cursor-pointer">ContactUs</span></Link>
             </div>
             <div className="copyright-section text-white flex flex-row justify-start items-center gap-x-1 mt-9">
               <LuCopyright className="text-neutral-500" />

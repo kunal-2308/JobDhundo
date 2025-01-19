@@ -5,24 +5,28 @@ import Profile from './pages/user/Profile';
 import Jobs from './pages/user/Jobs';
 import Login from './components/user/shared/Login';
 import Footer from './components/user/shared/Footer';
-import RecruiterLogin from './components/recruiter/Login';
+import RecruiterLogin from './components/recruiter/signupRedirect';
+import SignupLanding from './components/recruiter/SignupLanding';
+import LoginLanding from './components/recruiter/LoginLanding';
 
 function App() {
   return (
     <>
-      
+
       <Routes>
         {/* User Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/user/profile" element={<Profile />} />
         <Route path="/jobs" element={<Jobs />} />
-        <Route path='/user/login' element={<Login/>}/>
+        <Route path='/user/login' element={<Login />} />
 
 
-         {/* Recruiter Routes */}
-         <Route path='/recruiter/orgaisation/signup' element={<RecruiterLogin/>}/>
+        {/* Recruiter Routes */}
+        <Route path='/recruiter/orgaisation/signup' element={<RecruiterLogin />} />
+        <Route path='/redirect/organisation/signup' element={<SignupLanding />} />
+        <Route path='/recruiter/login' element={<LoginLanding/>}/>
       </Routes>
-      <Footer/>
+      <Footer />
     </>
   );
 }

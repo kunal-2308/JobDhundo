@@ -11,8 +11,10 @@ import AppliedJobsProfile from '@/components/user/profile/AppliedJobsProfile';
 import SavedJobsProfileSection from '@/components/user/profile/SavedJobsProfileSection';
 import PostedBlogsSectionProfile from '@/components/user/profile/PostedBlogsSectionProfile';
 import { useAuth0 } from "@auth0/auth0-react";
-
-
+import { IoDocumentOutline } from "react-icons/io5";
+import { LuMessageSquareText } from "react-icons/lu";
+import { LuTvMinimal } from "react-icons/lu";
+import { LuUserRoundCheck } from "react-icons/lu";
 function Profile() {
 
   var { logout, user } = useAuth0();
@@ -20,7 +22,7 @@ function Profile() {
   const [suser, setUserProfile] = useState({
     "_id": "64cf56b21f5d3c45e07b8d3b",
     "auth0Id": "auth0|123456789",
-    "email": "kunaltaware210@@example.com",
+    "email": "kunaltaware210@example.com",
     "userName": "Kunal Taware",
     "bio": "Web developer with a passion for building impactful projects.",
     "About": "Passionate Web Developer 💻 | Crafting seamless user experiences with a focus on responsive design 📱 and intuitive interfaces 🎨. Proficient in JavaScript, React, and Node.js 🚀, with a knack for turning ideas into functional, scalable solutions 🌟. Always eager to learn and adapt to emerging technologies 🧑‍💻, I thrive in collaborative environments 🤝 and enjoy tackling complex challenges head-on 🧩. Let’s create something amazing together! 🌐",
@@ -122,7 +124,7 @@ function Profile() {
 
   return (
     <>
-      <div className="main-profile-page">
+      <div className="main-profile-page mb-20">
         {/* Background Section */}
         <div className="bg-img-poster-section w-full h-[150px] bg-neutral-100 shadow-md flex justify-start items-center p-5 relative">
           <Link to='/'>
@@ -142,7 +144,7 @@ function Profile() {
           </div>
         </div>
         <div className="div-profile-name w-full flex justify-center items-center mt-14">
-          <span className='text-2xl font-semibold'>{user.name}</span>
+          <span className='text-2xl font-semibold'>{suser.userName}</span>
         </div>
         <div className="div-short-bio flex justify-center items-center mt-2">
           <span className='text-center w-[500px] text-sm text-neutral-700'>
@@ -150,7 +152,7 @@ function Profile() {
           </span>
         </div>
         <div className="div-email-section flex flex-row justify-center items-center gap-x-[8px] font-medium text-xs mt-4 text-neutral-500">
-          <span>{user.email}</span>
+          <span>{suser.email}</span>
           <span className='pb-2'>.</span>
           <span>Joined {date}</span>
           <span className='pb-2'>.</span>
@@ -201,7 +203,7 @@ function Profile() {
           <div className="div-main-page-content w-[70%]">
             {renderContent()}
           </div>
-          <div className="div-container-section pl-10 flex flex-col justify-start items-center">
+          <div className="div-container-section pl-10 flex flex-col justify-start items-cente gap-y-3">
             <div className="div-social-container w-full flex flex-col justify-start items-start border-[1px] pt-2 pb-3 px-4 rounded-xl">
               <div className="div-title">
                 <span className='text-lg font-semibold'>Social Links</span>
@@ -225,6 +227,49 @@ function Profile() {
 
               </div>
 
+            </div>
+            <div className="div-stats-container w-full flex flex-col justify-start items-start border-[1px] pt-2 pb-3 px-4 rounded-xl">
+              <div className="div-title">
+                <span className='text-lg font-semibold'>Account Stats</span>
+              </div>
+              <div className="div-content flex flex-col gap-y-2 mt-3 w-full">
+                <div className="applied-jobs bg-profileBlue p-2 w-full flex flex-row justify-between items-center rounded-xl px-2">
+                  <div className="div-content flex flex-row justify-start items-center gap-x-2 text-blue-500">
+                    <IoDocumentOutline size={20} />
+                    <span className='font-medium text-sm'>1689</span>
+                  </div>
+                  <div className="content-type flex justify-end items-center pr-1">
+                    <span className='text-xs text-neutral-500 font-normal'>Applications</span>
+                  </div>
+                </div>
+                <div className="Offers-jobs bg-profileGreen p-2 w-full flex flex-row justify-between items-center rounded-xl px-2">
+                  <div className="div-content flex flex-row justify-start items-center gap-x-2 text-green-500">
+                    <LuMessageSquareText size={20} />
+                    <span className='font-medium text-sm'>2</span>
+                  </div>
+                  <div className="content-type flex justify-end items-center pr-1">
+                    <span className='text-xs text-neutral-500 font-normal'>Offers</span>
+                  </div>
+                </div>
+                <div className="applied-jobs bg-profileRed p-2 w-full flex flex-row justify-between items-center rounded-xl px-2">
+                  <div className="div-content flex flex-row justify-start items-center gap-x-2 text-red-500">
+                    <LuTvMinimal size={20} />
+                    <span className='font-medium text-sm'>37</span>
+                  </div>
+                  <div className="content-type flex justify-end items-center pr-1">
+                    <span className='text-xs text-neutral-500 font-normal'>Blogs</span>
+                  </div>
+                </div>
+                <div className="applied-jobs bg-profileSkyBlue p-2 w-full flex flex-row justify-between items-center rounded-xl px-2">
+                  <div className="div-content flex flex-row justify-start items-center gap-x-2 text-sky-600">
+                    <LuUserRoundCheck size={20} />
+                    <span className='font-medium text-sm'>190912</span>
+                  </div>
+                  <div className="content-type flex justify-end items-center pr-1">
+                    <span className='text-xs text-neutral-500 font-normal'>Rank</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

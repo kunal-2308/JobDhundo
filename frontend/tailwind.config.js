@@ -41,6 +41,11 @@ export const theme = {
     colors: {
       mainGreen: "#B0DD7D",
       lightSkin : '#FAFAFA',
+      profileBlue:'#F6F8FE',
+      profileGreen:'#F8FEF9',
+      profileRed:'#FEF9F5',
+      profileSkyBlue:'#F7FEFF',
+
       background: "hsl(var(--background))",
       foreground: "hsl(var(--foreground))",
       card: {
