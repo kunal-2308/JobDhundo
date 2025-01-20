@@ -1,4 +1,4 @@
-const User = require("../models/userModel");
+const User = require("../../models/userModel");
 const jwt = require("jsonwebtoken");
 
 const COOKIE_OPTIONS = {
@@ -105,4 +105,17 @@ const check = async(req,res)=>{
   }
 }
 
-module.exports = { register, login,check };
+
+const signUp = async (req, res) => {
+  try {
+      let body = req.body;
+      console.log(body);
+
+  } catch (error) {
+      console.log(error);
+  }
+};
+
+
+
+module.exports = { register, login,check,signUp};

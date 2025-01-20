@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 import { Button } from '../ui/button';
 import { Link } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { toast } from 'sonner';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function LoginLanding() {
+    let navigate = useNavigate();
+
     let [companyDetails, setCompanyDetails] = useState({
         companyEmail: "",
         password: ""
@@ -13,7 +18,16 @@ function LoginLanding() {
 
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent default form submission
-        alert(companyDetails.password);
+        let response = await axios.post('http://localhost:8000/api/v1/recruiter/login', companyDetails, {
+            withCredentials: true
+        });
+
+        if (response) {
+            toast.success('LoggedIn Successfully');
+            navigate('/recruiter/profile');
+        }else{
+            toast.error('Error occured');
+        }
         setCompanyDetails({
             companyEmail: "",
             password: ""

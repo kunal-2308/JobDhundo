@@ -3,8 +3,12 @@ import { Button } from '../ui/button';
 import { Link } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast } from 'sonner';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function SignupLanding() {
+    let navigate = useNavigate();
+
     const [companyDetails, setCompanyDetails] = useState({
         companyName: "",
         companyEmail: "",
@@ -17,14 +21,21 @@ function SignupLanding() {
         e.preventDefault();
         if (companyDetails.password === companyDetails.confirmPassword) {
             //hit rhe axios  
+            let response = axios.post(`http://localhost:8000/api/v1/recruiter/signup`, companyDetails, { withCredentials: true });
+            if (response) {
+                toast.success('Organisation Created Successfully');
+                navigate('/recruiter/login');
+            }
+            else{
+                toast.error('error occured');
+            }
             setCompanyDetails({
                 companyName: "",
                 companyEmail: "",
                 password: "",
                 confirmPassword: "",
             });
-            toast.success('Successfully Registered');
-        }else{
+        } else {
             toast.error('Incorrect Password / Password Match Error');
         }
 
