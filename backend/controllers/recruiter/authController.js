@@ -1,4 +1,4 @@
-const Recruiter = require("../../models/recruiterModel"); // Correct path to model
+const Recruiter = require("../../models/recruiterModel");
 const jwt = require("jsonwebtoken");
 const bcryptjs = require("bcrypt");
 
@@ -94,4 +94,4 @@ const logoutRecruiter = async (req, res) => {
   }
 };
 
-module.exports = { signUp, loginRecruiter, logoutRecruiter }; // Export signUp function
+module.exports = { signUp, loginRecruiter, logoutRecruiter }; 
