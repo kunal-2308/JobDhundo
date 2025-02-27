@@ -20,7 +20,7 @@ let allowedOrigin = [
     'https://jobdhundo-theta.vercel.app'
 ]
 app.use(cors({
-    origin: allowedOrigin,
+    origin: 'https://jobdhundo-theta.vercel.app',
     credentials: true,
 }));
 app.use(cookieParser());
