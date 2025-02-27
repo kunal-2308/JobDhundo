@@ -3,9 +3,9 @@ const jwt = require("jsonwebtoken");
 
 const COOKIE_OPTIONS = {
   httpOnly: true,
-  secure: true, 
-  sameSite: "none", 
-  maxAge: 10 * 24 * 60 * 60 * 1000, 
+  secure: true, // Always true in production (HTTPS)
+  sameSite: "none", // Required for cross-site cookies
+  maxAge: 10 * 24 * 60 * 60 * 1000, // 10 days
 };
 
 const register = async (req, res) => {
@@ -57,38 +57,59 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   let { auth0Id, email, name, picture } = req.body;
-  console.log('Login Success');
+  console.log("🔹 Login route hit");
+
   try {
     let user = await User.findOne({ auth0Id });
 
     if (!user) {
+      console.log("🟢 New user detected, creating...");
       user = new User({
         auth0Id,
         email,
-        userName: name,
-        profilePhoto: picture,
+        userName: name || email,
+        profilePhoto: picture || "",
       });
       await user.save();
+    } else {
+      console.log("🟡 User already exists, logging in...");
     }
 
+    // Generate JWT token
     let token = jwt.sign(
       { auth0Id: user.auth0Id, email: user.email },
       process.env.SECRET_KEY,
       { expiresIn: "10d" }
     );
 
-    // Set the token as an HTTP-only cookie
-    res.cookie("token", token, COOKIE_OPTIONS);
-    console.log('Cookie set success');
+    console.log("🔹 Generated Token:", token);
+
+    // Try setting the cookie
+    try {
+      console.log("🔹 Setting HTTP-Only Cookie...");
+      res.cookie("token", token, {
+        httpOnly: true,
+        secure: true, 
+        sameSite: "None",
+        maxAge: 10 * 24 * 60 * 60 * 1000, // 10 days
+      });
+      console.log("✅ Cookie set successfully");
+    } catch (cookieError) {
+      console.error("❌ Error setting cookie:", cookieError.message);
+    }
+
+    // Send JSON response
     return res.status(user.isNew ? 201 : 200).json({
       message: user.isNew ? "User registered successfully" : "Login Success",
       user,
     });
+
   } catch (error) {
-    console.error("Error during login:", error.message);
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("❌ Error during login:", error.message);
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
 
 const logout = async(req,res) =>{
   try {
