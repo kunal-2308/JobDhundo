@@ -8,7 +8,6 @@ const COOKIE_OPTIONS = {
   maxAge: 10 * 24 * 60 * 60 * 1000, 
 };
 
-
 const register = async (req, res) => {
   let { auth0Id, email, name, picture } = req.body;
 
@@ -78,8 +77,6 @@ const login = async (req, res) => {
       { expiresIn: "10d" }
     );
 
-    console.log(token);
-
     // Set the token as an HTTP-only cookie
     res.cookie("token", token, COOKIE_OPTIONS);
     console.log('Cookie set success');
@@ -93,7 +90,21 @@ const login = async (req, res) => {
   }
 };
 
-
+const logout = async(req,res) =>{
+  try {
+    res.clearCookie("token");
+    return res.statu(200).json({
+      message:"Logout success",
+      status:true
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({
+      message:"Error occured during logout",
+      status:false
+    });
+  }
+}
 
 const check = async(req,res)=>{
   try {
@@ -105,17 +116,5 @@ const check = async(req,res)=>{
   }
 }
 
+module.exports = { register, login,check,logout};
 
-const signUp = async (req, res) => {
-  try {
-      let body = req.body;
-      console.log(body);
-
-  } catch (error) {
-      console.log(error);
-  }
-};
-
-
-
-module.exports = { register, login,check,signUp};

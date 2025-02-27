@@ -46,8 +46,6 @@ function Blogs() {
                                 <span className="bg-mainGreen text-black px-3 py-1 rounded-full text-xs font-semibold cursor-pointer hover:bg-opacity-80">Cybersecurity</span>
                                 <span className="bg-mainGreen text-black px-3 py-1 rounded-full text-xs font-semibold cursor-pointer hover:bg-opacity-80">Micoservices</span>
                                 <span className="bg-mainGreen text-black px-3 py-1 rounded-full text-xs font-semibold cursor-pointer hover:bg-opacity-80">User Experience</span>
-
- 
                             </div>
                         </div>
                     </div>
