@@ -15,8 +15,12 @@ const app = express();
 // Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+let allowedOrigin = [
+    'http://localhost:5173',
+    'https://jobdhundo-theta.vercel.app'
+]
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: allowedOrigin,
     credentials: true,
 }));
 app.use(cookieParser());
