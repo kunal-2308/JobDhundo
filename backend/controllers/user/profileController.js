@@ -47,7 +47,7 @@ const getUserProfile = async (req, res) => {
 
 const checkCookie = async(req,res) =>{
     try {
-        let cookie = req.cookie.token;
+        let cookie = req.cookies.token;
         console.log("Cookie : ",cookie);
     } catch (error) {
         console.log(error);
