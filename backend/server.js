@@ -4,7 +4,6 @@ const connectDb = require('../backend/DbConfig/dbConfig');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const authRoutes = require('./routes/authRoutes'); 
-const userModel = require('./models/userModel');
 const userRoutes = require('./routes/userRoutes');
 
 dotenv.config();
