@@ -45,4 +45,17 @@ const getUserProfile = async (req, res) => {
     }
 };
 
-module.exports = getUserProfile;
+const checkCookie = async(req,res) =>{
+    try {
+        let cookie = req.cookie.token;
+        console.log("Cookie : ",cookie);
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({
+            message : "Error occured",
+            status:false
+        });
+    }
+}
+
+module.exports = {getUserProfile,checkCookie};
