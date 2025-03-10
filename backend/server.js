@@ -5,7 +5,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const authRoutes = require('./routes/authRoutes'); 
 const userRoutes = require('./routes/userRoutes');
-
+const managerRoutes = require('./routes/managerRoutes');
 dotenv.config();
 connectDb();
 
@@ -36,8 +36,9 @@ app.get('/api/test-cookie', (req, res) => {
     res.json({ message: "Test cookie set!" });
 });
 
-app.use('/api/v1/auth', authRoutes); //-> both user and recruiter auth
+app.use('/api/v1/auth', authRoutes); 
 app.use('/api/v1/user', userRoutes); //contains all user routes
+app.use('/api/v1/manager',managerRoutes);
 
 
 const PORT = process.env.PORT || 5000;
