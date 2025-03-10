@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 
 const COOKIE_OPTIONS = {
   httpOnly: true,
-  secure: true, // Always true in production (HTTPS)
+  // secure: true, // Always true in production (HTTPS)
   sameSite: "none", // Required for cross-site cookies
   maxAge: 10 * 24 * 60 * 60 * 1000, // 10 days
 };
@@ -89,7 +89,7 @@ const login = async (req, res) => {
       console.log("🔹 Setting HTTP-Only Cookie...");
       res.cookie("token", token, {
         httpOnly: true,
-        secure: true, 
+        // secure: true, 
         sameSite: "None",
         maxAge: 10 * 24 * 60 * 60 * 1000, // 10 days
       });
