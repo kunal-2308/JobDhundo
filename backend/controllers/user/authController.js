@@ -35,7 +35,7 @@ const register = async (req, res) => {
     }
 
     const token = jwt.sign(
-      { auth0Id: user.auth0Id, email: user.email },
+      { auth0Id: user.auth0Id, email: user.email,role:user.role },
       process.env.SECRET_KEY,
       { expiresIn: "10d" }
     );
@@ -75,7 +75,7 @@ const login = async (req, res) => {
 
     // Generate JWT token
     let token = jwt.sign(
-      { auth0Id: user.auth0Id, email: user.email },
+      { auth0Id: user.auth0Id, email: user.email,role:user.role },
       process.env.SECRET_KEY,
       { expiresIn: "10d" }
     );
