@@ -57,13 +57,11 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   let { auth0Id, email, name, picture } = req.body;
-  console.log("🔹 Login route hit");
 
   try {
     let user = await User.findOne({ auth0Id });
 
     if (!user) {
-      console.log("🟢 New user detected, creating...");
       user = new User({
         auth0Id,
         email,
@@ -72,7 +70,7 @@ const login = async (req, res) => {
       });
       await user.save();
     } else {
-      console.log("🟡 User already exists, logging in...");
+      console.log("User already exists, logging in...");
     }
 
     // Generate JWT token
@@ -82,18 +80,15 @@ const login = async (req, res) => {
       { expiresIn: "10d" }
     );
 
-    console.log("🔹 Generated Token:", token);
 
     // Try setting the cookie
     try {
-      console.log("🔹 Setting HTTP-Only Cookie...");
       res.cookie("token", token, {
         httpOnly: true,
         // secure: true, 
         sameSite: "None",
         maxAge: 10 * 24 * 60 * 60 * 1000, // 10 days
       });
-      console.log("✅ Cookie set successfully");
     } catch (cookieError) {
       console.error("❌ Error setting cookie:", cookieError.message);
     }
