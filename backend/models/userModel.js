@@ -91,6 +91,7 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+
     resume: {
       type: String,
       default: null, // Will store the file path
