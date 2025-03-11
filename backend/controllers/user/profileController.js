@@ -1,4 +1,7 @@
 const jwt = require("jsonwebtoken");
+const path = require('path');
+const fs = require('fs');
+// ******************************************
 const User = require("../../models/userModel");
 
 const getUserProfile = async (req, res) => {
@@ -76,7 +79,37 @@ const updateProfile = async (req, res) => {
   }
 };
 
+// 🔹 Resume Upload Handler
+const uploadResume = async (req, res) => {
+  try {
+      if (!req.file) {
+          return res.status(400).json({ message: "No file uploaded" });
+      }
+
+      const filePath = req.file.path;
+      const { email } = req.user;
+
+      // Update the user's resume field with the file path
+      const updatedUser = await User.findOneAndUpdate(
+          { email },
+          { resume: filePath },
+          { new: true }
+      );
+
+      if (!updatedUser) {
+          return res.status(404).json({ message: "User not found" });
+      }
+
+      return res.status(200).json({
+          message: "Resume uploaded and associated successfully",
+          user: updatedUser,
+      });
+  } catch (error) {
+      return res.status(500).json({ message: "Error uploading resume", error: error.message });
+  }
+};
+
 module.exports = updateProfile;
 
 
-module.exports = { getUserProfile, checkCookie, updateProfile };
+module.exports = { getUserProfile, checkCookie, updateProfile,uploadResume  };

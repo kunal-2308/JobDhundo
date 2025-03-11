@@ -5,6 +5,8 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const authRoutes = require('./routes/authRoutes'); 
 const userRoutes = require('./routes/userRoutes');
+const path = require('path');
+
 
 dotenv.config();
 connectDb();
@@ -25,6 +27,12 @@ app.use(cors({
     origin: allowedOrigins,
     credentials: true, 
 }));
+
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+
+
 
 // ✅ Test Route: Check if Cookies Are Working
 app.get('/api/test-cookie', (req, res) => {
